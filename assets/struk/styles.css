@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Redressed&family=Ubuntu:wght@400;700&display=swap");
+
+:root {
+  --bg-clr: #4454e4;
+  --white: #fff;
+  --invoice-left-bg: #ffe0d0;
+  --primary-clr: #2f2929;
+  --secondary-clr: #4454e4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  background: var(--bg-clr);
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--primary-clr);
+  padding: 0 20px;
+}
+
+.main_title {
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  background: var(--secondary-clr);
+  color: var(--white);
+  padding: 5px 15px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.p_title {
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+}
+
+.p_title > span {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.text_left {
+  text-align: left;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.invoice {
+  width: 500px;
+  max-width: 100%;
+  height: auto;
+  background: var(--white);
+  position: relative;
+  margin: 20px auto;
+  display: flex;
+}
+
+.invoice .invoice_left {
+  width: 275px;
+  background: var(--invoice-left-bg);
+  padding: 50px 40px;
+}
+
+.invoice .invoice_right {
+  width: 525px;
+  padding: 50px 40px;
+}
+
+.invoice .invoice_left > div,
+.invoice .invoice_right > div {
+  margin-bottom: 50px;
+}
+
+.invoice .invoice_left .i_logo p,
+.invoice .invoice_right .title {
+  font-size: 32px;
+  line-height: 38px;
+  color: var(--secondary-clr);
+}
+
+.invoice .invoice_left .i_logo p {
+  font-family: "Redressed", cursive;
+  text-align: center;
+}
+
+.invoice .w_15 {
+  width: 15%;
+}
+.invoice .w_20 {
+  width: 20%;
+}
+
+.invoice .w_50 {
+  width: 40%;
+}
+
+.invoice .w_55 {
+  width: 55%;
+}
+
+.invoice .i_table .i_row {
+  display: flex;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.invoice .i_table .i_row p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.invoice .i_table .i_row {
+  border-bottom: 2px dashed var(--invoice-left-bg);
+}
+
+.invoice .i_table .i_table_head .i_row {
+  background: #a3a7c6;
+  border: 0;
+}
+
+.invoice .invoice_right .terms {
+  margin: 0;
+}
+
+.invoice .invoice_right .terms > p {
+  text-align: left;
+  padding: 0 10px;
+}
