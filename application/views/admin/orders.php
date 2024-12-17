@@ -70,237 +70,289 @@
         </ul>
     </div>
 </nav>
-
 <!-- End Navbar -->
-<div class="row">
-    <div class="col-12">
-        <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">Detail Orders</h6>
+<div class="container-fluid py-4">
+    <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Laporan Penjualan
+    </button>
+    <!-- Modal -->
+    <div class="container-fluid py-4">
+        <div style="width:95%; margin-left:2rem;">
+            <?= $this->session->flashdata('alert',true)?>
+        </div>
+    </div>
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Laporan Penjualan</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
+                <form action="<?= base_url('admin/orders/laporan')?>" method="post">
+
+                    <div class="modal-body">
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Dari</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="tanggal1">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Sampai</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="tanggal2">
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Print</button>
+                    </div>
+                </form>
             </div>
-            <div class="card-body px-0 pb-2">
-                <div class="table-responsive p-0">
-                    <table id="myTable" class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
+        </div>
+        <div></div>
 
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kode Barang</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Bukti</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Payment</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                <th
-                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Struk</th>
+    </div>
+    <!-- End Navbar -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <h6 class="text-white text-capitalize ps-3">Detail Orders</h6>
+                    </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table id="myTable" class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
 
-                            </tr>
-                        </thead>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tanggal</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kode Barang</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Total</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Bukti</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Payment</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Struk</th>
 
-                        <tbody class="table-border-bottom-0">
-                            <?php 
+                                </tr>
+                            </thead>
+
+                            <tbody class="table-border-bottom-0">
+                                <?php 
                             $no =1;
                             foreach ($orders as $aa) { ?>
-                            <tr>
+                                <tr>
 
-                            <td class="align-middle text-center"><?= $aa['tanggal'] ?></td>
-                                <td class="align-middle text-center"><?= $aa['email'] ?></td>
-                                <td class="align-middle text-center" style="color:blue;">#<?= $aa['barcode'] ?></td>
-                                <td class="align-middle text-center">Rp
-                                    <?= number_format($aa['total'], 0, ',', '.') ?></td>
+                                    <td class="align-middle text-center"><?= $aa['tanggal'] ?></td>
+                                    <td class="align-middle text-center"><?= $aa['email'] ?></td>
+                                    <td class="align-middle text-center" style="color:blue;">#<?= $aa['barcode'] ?></td>
+                                    <td class="align-middle text-center">Rp
+                                        <?= number_format($aa['total'], 0, ',', '.') ?></td>
                                     <td>
-    
+
                                         <a
-                                        href="<?= base_url('upload/pembayaran/' . $aa['foto']) ?>"
-                                        target="_blank"
-                                        style="color: blue; text-decoration: underline;">
-                                        <div>Bukti Pembayaran</div>
-                                    </a>
-                                </td>
-                                <td class="align-middle text-center"><?= $aa['payment'] ?></td>
-                                <td class="align-middle text-center">
-                                    <div class="btn btn-<?=$aa['status'] == 'pending' ? 'danger' : 'success'?>">
-                                        <?= $aa['status'] ?>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        class="btn btn-sm btn-info"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#konten<?= $no; ?>"
-                                        fdprocessedid="iw7x2p">
-                                        <span class="tf-icons bx bx-edit">Konfirm</span>
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div
-                                        class="modal fade"
-                                        id="konten<?= $no; ?>"
-                                        tabindex="-1"
-                                        style="display: none;"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <form
-                                                action="<?= base_url('admin/orders/update') ?>"
-                                                method="post"
-                                                enctype="multipart/form-data">
-                                                <input type="hidden" name="nama_foto" value="<?=$aa['foto']?>">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle"></h5>
-                                                        <button
-                                                            type="button"
-                                                            class="btn-close"
-                                                            data-bs-dismiss="modal"
-                                                            aria-label="Close"
-                                                            fdprocessedid="ax0u6d"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <label class="col-sm-2 col-form-label">Email</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                   
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="email"
-                                                                    value="<?=$this->session->userdata('email')?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">Alamat</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                  
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="alamat"
-                                                                    value="<?= $aa['alamat'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">No Telp</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                  
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="no_telp"
-                                                                    value="<?= $aa['no_telp'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">Nama Penerima</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                  
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="nama_penerima"
-                                                                    value="<?= $aa['nama_penerima'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">Barcode</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                   
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="barcode"
-                                                                    value="<?= $aa['barcode'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">Total</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                   
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="total"
-                                                                    value="<?= $aa['total'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                
-                                                        <div class="row">
-                                                        <label class="col-sm-2 col-form-label">Produk</label>
-                                                        <div class="col sm-10">
-                                                                <input
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="produk"
-                                                                    value="<?= $aa['produk'] ?>">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <label class="col-sm-2 col-form-label">Payment</label>
-                                                            <div class="col sm-10">
-                                                                <input
-                                                                   
-                                                                    id="nameWithTitle"
-                                                                    class="form-control"
-                                                                    placeholder="Masukkan Nama"
-                                                                    name="payment"
-                                                                    value="<?= $aa['payment'] ?>">
-                                                            </div>
-                                                        </div>
-
-                                                        <div value="<?= base_url('upload/pembayaran/' . $aa['foto']) ?>"></div>
-                                                        <input type="hidden" name="status" value="Complete">
-
-                                                        <input type="hidden" name="id_order" value="<?= $aa['id_order'] ?>">
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button
-                                                            type="button"
-                                                            class="btn btn-outline-secondary"
-                                                            data-bs-dismiss="modal"
-                                                            fdprocessedid="3t093q">Close</button>
-                                                        <button type="submit" class="btn btn-success" fdprocessedid="7zqvqu">KONFIRMASI</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                                            href="<?= base_url('upload/pembayaran/' . $aa['foto']) ?>"
+                                            target="_blank"
+                                            style="color: blue; text-decoration: underline;">
+                                            <div>Bukti Pembayaran</div>
+                                        </a>
                                     </td>
-                                </div>
-                                <td class="align-middle text-center">
-                                    <div class="btn btn-warning"> <a href="<?= base_url('beranda/print'); ?>"
-                                    target="_blank">Struk</a></div>
-                                </td>
+                                    <td class="align-middle text-center"><?= $aa['payment'] ?></td>
+                                    <td class="align-middle text-center">
+                                        <div class="btn btn-<?=$aa['status'] == 'pending' ? 'danger' : 'success'?>">
+                                            <?= $aa['status'] ?>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm btn-info"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#konten<?= $no; ?>"
+                                            fdprocessedid="iw7x2p">
+                                            <span class="tf-icons bx bx-edit">Konfirm</span>
+                                        </button>
 
-                            </tr>
-                            <?php
+                                        <!-- Modal -->
+                                        <div
+                                            class="modal fade"
+                                            id="konten<?= $no; ?>"
+                                            tabindex="-1"
+                                            style="display: none;"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <form
+                                                    action="<?= base_url('admin/orders/update') ?>"
+                                                    method="post"
+                                                    enctype="multipart/form-data">
+                                                    <input type="hidden" name="nama_foto" value="<?=$aa['foto']?>">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalCenterTitle"></h5>
+                                                            <button
+                                                                type="button"
+                                                                class="btn-close"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close"
+                                                                fdprocessedid="ax0u6d"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">Email</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="email"
+                                                                        value="<?=$this->session->userdata('email')?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">Alamat</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="alamat"
+                                                                        value="<?= $aa['alamat'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">No Telp</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="no_telp"
+                                                                        value="<?= $aa['no_telp'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">Nama Penerima</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="nama_penerima"
+                                                                        value="<?= $aa['nama_penerima'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">Barcode</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="barcode"
+                                                                        value="<?= $aa['barcode'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label class="col-sm-2 col-form-label">Total</label>
+                                                                <div class="col sm-10">
+                                                                    <input
+                                                                        id="nameWithTitle"
+                                                                        class="form-control"
+                                                                        placeholder="Masukkan Nama"
+                                                                        name="total"
+                                                                        value="<?= $aa['total'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+
+                                                                <div class="row">
+                                                                    <label class="col-sm-2 col-form-label">Produk</label>
+                                                                    <div class="col sm-10">
+                                                                        <input
+                                                                            id="nameWithTitle"
+                                                                            class="form-control"
+                                                                            placeholder="Masukkan Nama"
+                                                                            name="produk"
+                                                                            value="<?= $aa['produk'] ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label class="col-sm-2 col-form-label">Payment</label>
+                                                                    <div class="col sm-10">
+                                                                        <input
+                                                                            id="nameWithTitle"
+                                                                            class="form-control"
+                                                                            placeholder="Masukkan Nama"
+                                                                            name="payment"
+                                                                            value="<?= $aa['payment'] ?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div value="<?= base_url('upload/pembayaran/' . $aa['foto']) ?>"></div>
+                                                                <input type="hidden" name="status" value="Complete">
+
+                                                                <input type="hidden" name="id_order" value="<?= $aa['id_order'] ?>">
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button
+                                                                    type="button"
+                                                                    class="btn btn-outline-secondary"
+                                                                    data-bs-dismiss="modal"
+                                                                    fdprocessedid="3t093q">Close</button>
+                                                                <button type="submit" class="btn btn-success" fdprocessedid="7zqvqu">KONFIRMASI</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </div>
+                                        <td class="align-middle text-center">
+                                            <div class="btn btn-warning">
+                                                <a href="<?= base_url('beranda/print'); ?>" target="_blank">Struk</a>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <?php
                         $no++;
                      } ?>
 
-                        </tbody>
+                                </tbody>
 
-                    </table>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-</div>
+    </div>
 </div>
 </div>
 </div>
